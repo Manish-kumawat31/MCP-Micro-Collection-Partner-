@@ -14,7 +14,7 @@ connectDB();
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: 'https://mcp-system-mocha.vercel.app', credentials: true }));
+app.use(cors({ origin: 'https://mcp-ruby.vercel.app', credentials: true }));
 
 
   
