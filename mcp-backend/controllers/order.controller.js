@@ -19,7 +19,9 @@ export const createOrder = async (req, res) => {
 // Get All Orders
 export const getOrders = async (req, res) => {
   try {
-    const orders = await Order.find().populate("assignedTo", "name");
+    const mcpId = req.user._id;
+    
+    const orders = await Order.find({mcpId : mcpId}).populate("assignedTo", "name");
     res.json(orders);
   } catch (err) {
     res.status(500).json({ message: "Failed to fetch orders" });
