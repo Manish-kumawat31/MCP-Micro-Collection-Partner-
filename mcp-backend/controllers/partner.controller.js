@@ -6,7 +6,8 @@ import userModel from "../models/user.model.js";
 // GET all partners
 export const getAllPartners = async (req, res) => {
     try {
-      const partners = await PickupPartner.find();
+      const mcpId = req.user._id;
+      const partners = await PickupPartner.find({mcpId:mcpId});
       res.json(partners);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch partners" });

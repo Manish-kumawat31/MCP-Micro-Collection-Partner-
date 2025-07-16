@@ -15,17 +15,27 @@ export const getMCPDashboardData = async (req, res) => {
     const pickupPartners = partners.map(partner => ({
       name: partner.name,
       status: partner.status,
-      totalOrders : partner.totalOrders
+      totalOrders: partner.totalOrders
     }));
 
     // 3. Order Stats for these partners
-    const totalOrders = await Order.countDocuments();
-    const completed = await Order.countDocuments({ status: /completed/i });
-    const pending = await Order.countDocuments({ status: /pending/i });
+    const totalOrders = await Order.countDocuments({ mcpId });
+
+    // Completed orders for this MCP
+    const completed = await Order.countDocuments({
+      mcpId,
+      status: /completed/i
+    });
+
+    // Pending orders for this MCP
+    const pending = await Order.countDocuments({
+      mcpId,
+      status: /pending/i
+    });
 
 
 
-    
+
 
     res.status(200).json({
       walletBalance,
